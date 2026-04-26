@@ -138,6 +138,35 @@
   footer{padding:3rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border-dim);}
   .footer-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text-dim);font-weight:300;}
   .footer-copy{font-size:12px;color:var(--text-dim);letter-spacing:0.05em;}
+  .about-visual { position: relative; height: 560px; }
+  .profile-photo-wrap { position: relative; height: 100%; width: 100%; }
+  .profile-photo {
+    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    display: block;
+    filter: saturate(0.85) brightness(0.93) contrast(1.06);
+    transition: filter 0.5s;
+  }
+  .profile-photo-wrap:hover .profile-photo { filter: saturate(1) brightness(0.97) contrast(1.06); }
+  .profile-photo-border {
+    position: absolute; inset: 0; pointer-events: none;
+    border: 1px solid var(--border);
+    box-shadow: inset 0 -120px 80px rgba(10,10,11,0.85);
+  }
+  .profile-photo-border::before {
+    content: ''; position: absolute; top: 1.5rem; left: 1.5rem;
+    width: 48px; height: 48px;
+    border-top: 2px solid var(--gold); border-left: 2px solid var(--gold);
+  }
+  .profile-photo-border::after {
+    content: ''; position: absolute; bottom: 1.5rem; right: 1.5rem;
+    width: 48px; height: 48px;
+    border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold);
+  }
+  .profile-badge {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 2rem 2rem 1.75rem;
+    background: linear-gradient(to top, rgba(10,10,11,0.98) 0%, rgba(10,10,11,0.7) 80%, transparent 100%);
+  }
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   @keyframes scrollPulse{0%,100%{opacity:0.3}50%{opacity:1}}
@@ -149,7 +178,7 @@
   @media(max-width:900px){
     nav{padding:1.5rem 2rem;} .nav-links{display:none;} section{padding:5rem 2rem;}
     .hero{padding:0 2rem 5rem;} .about,.skills-layout,.contact,.edu-grid{grid-template-columns:1fr;}
-    .about-visual{height:280px;} .industries-grid{grid-template-columns:1fr 1fr;}
+    .about-visual{height:380px;} .industries-grid{grid-template-columns:1fr 1fr;}
     .work-grid{grid-template-columns:1fr;} .work-item:first-child{grid-column:1;aspect-ratio:16/9;}
     .timeline-item{grid-template-columns:1fr;gap:0.5rem;} .hero-sub{flex-direction:column;align-items:flex-start;gap:2rem;}
     .hero-stats{gap:2rem;} footer{flex-direction:column;gap:1rem;text-align:center;}
@@ -195,14 +224,12 @@
 
 <section class="about" id="about">
   <div class="about-visual reveal">
-    <div class="about-card about-card-main">
-      <div class="about-card-label">Current Role</div>
-      <div class="about-card-value">Digital Experience Sr. Specialist<br>Tasama &middot; PIF Portfolio Company</div>
-    </div>
-    <div class="about-card about-card-accent">
-      <div style="padding:0 1.5rem">
-        <div class="about-card-label">CS Graduate &middot; PSU &amp; Carleton</div>
-        <div class="about-card-value">Vision 2030 Aligned</div>
+    <div class="profile-photo-wrap">
+      <img src="assets/images/faris-profile.jpg" alt="Faris Alsajjan at the Public Investment Fund" class="profile-photo">
+      <div class="profile-photo-border"></div>
+      <div class="profile-badge">
+        <div class="about-card-label">Current Role</div>
+        <div class="about-card-value" style="font-size:17px">Digital Experience Sr. Specialist<br><span style="color:var(--gold);font-size:13px">Tasama &middot; PIF Portfolio</span></div>
       </div>
     </div>
   </div>
