@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faris Alsajjan — Digital Experience Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --bg: #0A0A0B;
+    --surface: #121214;
+    --surface2: #1A1A1D;
+    --border: rgba(201,168,76,0.2);
+    --border-dim: rgba(255,255,255,0.07);
+    --text: #F0EBE0;
+    --text-muted: #7A7570;
+    --text-dim: #4A4744;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed; width: 8px; height: 8px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.1s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.5); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.15s ease, width 0.2s, height 0.2s, opacity 0.2s;
+    transform: translate(-50%, -50%);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, rgba(10,10,11,0.95) 0%, transparent 100%);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .hero-glow {
+    position: absolute; top: 20%; right: 10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Syne', sans-serif; font-size: 11px;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.5rem; opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 9vw, 130px);
+    font-weight: 300; line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .hero-name em { font-style: italic; color: var(--gold); }
+  .hero-divider {
+    width: 80px; height: 1px; background: var(--gold);
+    margin: 2rem 0; opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-sub {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .hero-title {
+    font-size: 16px; font-weight: 300; line-height: 1.7;
+    color: var(--text-muted); max-width: 400px;
+  }
+  .hero-title strong { color: var(--text); font-weight: 400; }
+  .hero-stats { display: flex; gap: 3rem; }
+  .hero-stat { text-align: right; }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px; font-weight: 300; color: var(--gold); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-dim); margin-top: 4px;
+  }
+  .scroll-indicator {
+    position: absolute; right: 4rem; bottom: 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeIn 1s 1.5s forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+  .scroll-text {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-dim); writing-mode: vertical-lr;
+  }
+
+  /* SECTION COMMON */
+  section { padding: 8rem 4rem; }
+  .section-tag {
+    font-family: 'Syne', sans-serif; font-size: 10px;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-tag::before {
+    content: ''; display: block;
+    width: 30px; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300; line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ABOUT */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .about-visual {
+    position: relative; height: 500px;
+  }
+  .about-card {
+    position: absolute;
+    background: var(--surface2); border: 1px solid var(--border-dim);
+    padding: 2rem;
+  }
+  .about-card-main {
+    inset: 0 0 80px 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    background: linear-gradient(135deg, var(--surface2) 0%, rgba(26,26,29,0.5) 100%);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .about-card-main::before {
+    content: 'FA';
+    position: absolute; top: -20px; left: -20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 180px; font-weight: 300; color: var(--gold);
+    opacity: 0.05; line-height: 1; pointer-events: none;
+  }
+  .about-card-accent {
+    bottom: 0; right: 0; width: 55%; height: 120px;
+    background: var(--gold-dim); border: 1px solid var(--border);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about-card-label {
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+  }
+  .about-card-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; color: var(--text); font-weight: 300;
+  }
+  .about-text { }
+  .about-text p {
+    font-size: 16px; line-height: 1.9; color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .about-text p strong { color: var(--text); font-weight: 400; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2rem; }
+  .about-tag {
+    padding: 6px 14px; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--border-dim); color: var(--text-muted);
+    transition: all 0.3s;
+  }
+  .about-tag:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* INDUSTRIES */
+  .industries-header { margin-bottom: 4rem; }
+  .industries-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border-dim);
+    border: 1px solid var(--border-dim);
+  }
+  .industry-card {
+    background: var(--bg); padding: 2.5rem 2rem;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
+  }
+  .industry-card:hover { background: var(--surface2); }
+  .industry-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px; background: var(--gold);
+    transition: width 0.4s;
+  }
+  .industry-card:hover::after { width: 100%; }
+  .industry-icon {
+    font-size: 28px; margin-bottom: 1.5rem; display: block;
+    filter: grayscale(1) brightness(0.6);
+    transition: filter 0.3s;
+  }
+  .industry-card:hover .industry-icon { filter: none; }
+  .industry-name {
+    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600;
+    color: var(--text); margin-bottom: 0.5rem; letter-spacing: -0.01em;
+  }
+  .industry-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+  /* WORK */
+  .work-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .work-item {
+    position: relative; overflow: hidden; background: var(--surface);
+    aspect-ratio: 16/10;
+  }
+  .work-item:first-child { grid-column: 1 / -1; aspect-ratio: 21/9; }
+  .work-blur {
+    position: absolute; inset: 0;
+    background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .work-blur-pattern {
+    position: absolute; inset: 0;
+    opacity: 0.4;
+  }
+  /* Simulated blurred content */
+  .blur-sim {
+    width: 100%; height: 100%;
+    filter: blur(12px) brightness(0.4) saturate(0.5);
+    transform: scale(1.1);
+    background-size: cover; background-position: center;
+  }
+  .work-sim-1 { background: linear-gradient(135deg, #1a3a5c 0%, #0d2a45 30%, #1e4060 60%, #152e50 100%); }
+  .work-sim-2 { background: linear-gradient(135deg, #1a2e1a 0%, #0d2010 30%, #1e3f1e 60%, #152815 100%); }
+  .work-sim-3 { background: linear-gradient(135deg, #3a1a1a 0%, #2a0d0d 30%, #401e1e 60%, #2e1515 100%); }
+  .work-sim-4 { background: linear-gradient(135deg, #2a1a3a 0%, #1a0d2a 30%, #3f1e40 60%, #281528 100%); }
+  .work-sim-5 { background: linear-gradient(135deg, #2a2a1a 0%, #1a1a0d 30%, #3f3f1e 60%, #282815 100%); }
+
+  /* UI elements inside blur simulation */
+  .sim-ui { position: absolute; inset: 0; padding: 1.5rem; opacity: 0.6; }
+  .sim-bar { height: 8px; border-radius: 4px; margin-bottom: 8px; background: rgba(255,255,255,0.15); }
+  .sim-chart { display: flex; align-items: flex-end; gap: 6px; height: 60px; margin-top: 1rem; }
+  .sim-col { flex: 1; background: rgba(255,255,255,0.12); border-radius: 2px; }
+
+  .work-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,10,11,0.97) 0%, rgba(10,10,11,0.3) 60%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2.5rem;
+    opacity: 1;
+    transition: opacity 0.4s;
+  }
+  .work-hover-reveal {
+    position: absolute; inset: 0;
+    background: rgba(10,10,11,0.92);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 3rem; opacity: 0; transition: opacity 0.4s;
+  }
+  .work-item:hover .work-overlay { opacity: 0; }
+  .work-item:hover .work-hover-reveal { opacity: 1; }
+
+  .work-tag {
+    display: inline-block; margin-bottom: 0.75rem;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); padding: 4px 10px;
+    border: 1px solid var(--border);
+  }
+  .work-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; color: var(--text);
+    line-height: 1.2; margin-bottom: 0.5rem;
+  }
+  .work-name-small { font-size: 22px; }
+  .work-year { font-size: 12px; color: var(--text-dim); }
+
+  .work-hover-tag {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .work-hover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 300; color: var(--text);
+    line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .work-hover-desc {
+    font-size: 14px; color: var(--text-muted); line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .work-hover-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .work-pill {
+    font-size: 10px; padding: 4px 10px; letter-spacing: 0.08em;
+    border: 1px solid var(--border-dim); color: var(--text-dim);
+  }
+  .work-hover-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-top: 1.5rem;
+    padding-bottom: 4px; border-bottom: 1px solid var(--gold);
+  }
+
+  /* SKILLS */
+  .skills { background: var(--surface); }
+  .skills-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; margin-top: 4rem; }
+  .skills-list { }
+  .skill-category { margin-bottom: 2.5rem; }
+  .skill-cat-title {
+    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .skill-items { display: flex; flex-direction: column; gap: 4px; }
+  .skill-item { display: flex; align-items: center; gap: 1rem; padding: 8px 0; border-bottom: 1px solid var(--border-dim); }
+  .skill-item-name { font-size: 14px; color: var(--text-muted); flex: 1; }
+  .skill-bar-track { flex: 2; height: 2px; background: var(--border-dim); }
+  .skill-bar-fill { height: 100%; background: var(--gold); transform-origin: left; }
+  .skill-pct { font-size: 12px; color: var(--text-dim); min-width: 32px; text-align: right; }
+
+  .tools-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .tool-card {
+    background: var(--surface2); border: 1px solid var(--border-dim);
+    padding: 1.25rem; transition: border-color 0.3s;
+  }
+  .tool-card:hover { border-color: var(--border); }
+  .tool-icon { font-size: 22px; margin-bottom: 0.75rem; display: block; }
+  .tool-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600; color: var(--text); }
+  .tool-type { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+  /* TIMELINE */
+  .timeline { }
+  .timeline-header { margin-bottom: 4rem; }
+  .timeline-items { position: relative; }
+  .timeline-line {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border-dim);
+  }
+  .timeline-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 3rem; padding: 2.5rem 0 2.5rem 2.5rem;
+    border-bottom: 1px solid var(--border-dim);
+    position: relative;
+  }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -4px; top: 2.8rem;
+    width: 8px; height: 8px; background: var(--bg);
+    border: 1px solid var(--gold); border-radius: 50%;
+  }
+  .timeline-item:hover::before { background: var(--gold); }
+  .timeline-meta { }
+  .timeline-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; color: var(--gold-dim-text, rgba(201,168,76,0.4));
+    font-weight: 300; line-height: 1;
+    --gold-dim-text: rgba(201,168,76,0.4);
+  }
+  .timeline-period { font-size: 12px; color: var(--text-dim); margin-top: 4px; letter-spacing: 0.08em; }
+  .timeline-role {
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 600;
+    color: var(--text); margin-bottom: 4px;
+  }
+  .timeline-company { font-size: 13px; color: var(--gold); margin-bottom: 1rem; }
+  .timeline-desc { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+
+  /* CONTACT */
+  .contact {
+    background: var(--surface);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .contact-cta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300; line-height: 1.15; color: var(--text);
+  }
+  .contact-cta em { font-style: italic; color: var(--gold); }
+  .contact-links { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--border-dim);
+    text-decoration: none; color: var(--text);
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .contact-link::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gold-dim); transform: translateX(-100%);
+    transition: transform 0.4s;
+  }
+  .contact-link:hover::before { transform: translateX(0); }
+  .contact-link:hover { border-color: var(--border); }
+  .contact-link-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+  .contact-link-value { font-size: 15px; color: var(--text); position: relative; }
+  .contact-link-arrow { color: var(--gold); font-size: 18px; position: relative; }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border-dim);
+  }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: var(--text-dim); font-weight: 300;
+  }
+  .footer-copy { font-size: 12px; color: var(--text-dim); letter-spacing: 0.05em; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(0.8); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 2rem; }
+    .hero { padding: 0 2rem 5rem; }
+    .about, .skills-layout, .contact { grid-template-columns: 1fr; }
+    .about-visual { height: 300px; }
+    .industries-grid { grid-template-columns: 1fr 1fr; }
+    .work-grid { grid-template-columns: 1fr; }
+    .work-item:first-child { grid-column: 1; aspect-ratio: 16/9; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    .hero-sub { flex-direction: column; align-items: flex-start; gap: 2rem; }
+    .hero-stats { gap: 2rem; }
+    .work-hover-reveal { display: none; }
+    .work-overlay { opacity: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Faris Alsajjan</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-lines"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-eyebrow">Digital Experience & Automation · Riyadh, Saudi Arabia</div>
+  <h1 class="hero-name">Faris<br><em>Alsajjan</em></h1>
+  <div class="hero-divider"></div>
+  <div class="hero-sub">
+    <p class="hero-title">
+      <strong>Senior Customer Experience & Digital Journey Specialist</strong><br>
+      Bridging strategy and execution — transforming how people<br>interact with enterprise systems, AI, and digital services.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">8+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">15+</div>
+        <div class="hero-stat-label">Live Workstreams</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">Sectors Served</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-text">Scroll</div>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual reveal">
+    <div class="about-card about-card-main">
+      <div class="about-card-label">Current Role</div>
+      <div class="about-card-value">Sr. CX & Digital Journey<br>Specialist — TASAMA</div>
+    </div>
+    <div class="about-card about-card-accent">
+      <div style="padding: 0 1.5rem">
+        <div class="about-card-label">PIF Portfolio · Vision 2030</div>
+        <div class="about-card-value">DX&A Lead</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-text">
+    <div class="section-tag reveal">About</div>
+    <h2 class="section-title reveal reveal-delay-1">Designing <em>journeys</em> that move people.</h2>
+    <div style="height: 1rem"></div>
+    <p class="reveal reveal-delay-2">
+      I work at the intersection of <strong>customer experience strategy</strong>, enterprise technology, and digital automation. At TASAMA — a PIF portfolio company — I lead the Digital Experience & Automation function, overseeing AI contact centers, CRM implementation, and omnichannel transformation.
+    </p>
+    <p class="reveal reveal-delay-3">
+      My work spans the full lifecycle: from <strong>maturity assessments and benchmarking</strong> against industry leaders, to hands-on delivery of platforms like Salesforce, ServiceNow, Oracle, and AI-powered tools — all shaped by Vision 2030's ambition.
+    </p>
+    <div class="about-tags reveal reveal-delay-4">
+      <span class="about-tag">CX Strategy</span>
+      <span class="about-tag">Digital Transformation</span>
+      <span class="about-tag">AI & Automation</span>
+      <span class="about-tag">Omnichannel</span>
+      <span class="about-tag">Enterprise Systems</span>
+      <span class="about-tag">Vision 2030</span>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries" style="padding-top: 6rem; padding-bottom: 6rem;">
+  <div class="industries-header">
+    <div class="section-tag reveal">Industries</div>
+    <h2 class="section-title reveal reveal-delay-1">Sectors I've <em>shaped</em>.</h2>
+  </div>
+
+  <div class="industries-grid reveal reveal-delay-2">
+    <div class="industry-card">
+      <span class="industry-icon">🏛️</span>
+      <div class="industry-name">Government & Public Sector</div>
+      <div class="industry-desc">Digital services transformation aligned with Vision 2030 national programs and PIF portfolio mandates.</div>
+    </div>
+    <div class="industry-card">
+      <span class="industry-icon">🏗️</span>
+      <div class="industry-name">Real Estate & Development</div>
+      <div class="industry-desc">Customer journey design and CRM implementation for large-scale real estate development and leasing platforms.</div>
+    </div>
+    <div class="industry-card">
+      <span class="industry-icon">🤖</span>
+      <div class="industry-name">AI & Contact Center Tech</div>
+      <div class="industry-desc">End-to-end AI contact center delivery — from vendor selection and call flow design to live go-live management.</div>
+    </div>
+    <div class="industry-card">
+      <span class="industry-icon">💼</span>
+      <div class="industry-name">Professional Services</div>
+      <div class="industry-desc">Strategic consulting and digital benchmarking for enterprise clients across the Saudi private and public sectors.</div>
+    </div>
+    <div class="industry-card">
+      <span class="industry-icon">📱</span>
+      <div class="industry-name">Digital Channels & FinTech</div>
+      <div class="industry-desc">WhatsApp commerce, self-service portals, and digital payment journeys for financial and property sectors.</div>
+    </div>
+    <div class="industry-card">
+      <span class="industry-icon">🏥</span>
+      <div class="industry-name">Healthcare & Social</div>
+      <div class="industry-desc">CX process design for social and healthcare-aligned PIF entities delivering citizen-facing services.</div>
+    </div>
+    <div class="industry-card">
+      <span class="industry-icon">⚡</span>
+      <div class="industry-name">Infrastructure & Utilities</div>
+      <div class="industry-desc">Digital infrastructure planning, service catalog design, and ITSM rollouts in asset-heavy sectors.</div>
+    </div>
+    <div class="industry-card">
+      <span class="industry-icon">🌐</span>
+      <div class="industry-name">Technology & SaaS</div>
+      <div class="industry-desc">Salesforce, ServiceNow, Oracle integrations and enterprise platform governance across multi-vendor ecosystems.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" style="padding: 6rem 0; background: var(--surface);">
+  <div style="padding: 0 4rem">
+    <div class="work-header">
+      <div>
+        <div class="section-tag reveal">Featured Work</div>
+        <h2 class="section-title reveal reveal-delay-1">Delivery that <em>speaks</em>.</h2>
+      </div>
+      <p style="font-size: 13px; color: var(--text-dim); max-width: 260px; line-height: 1.7; text-align: right;" class="reveal reveal-delay-2">
+        Work samples are intentionally blurred to protect client confidentiality. Hover to learn more.
+      </p>
+    </div>
+  </div>
+
+  <div class="work-grid" style="padding: 0;">
+
+    <!-- Item 1: SAWT AI Contact Center (featured) -->
+    <div class="work-item reveal">
+      <div class="work-blur">
+        <div class="blur-sim work-sim-1">
+          <div class="sim-ui">
+            <div class="sim-bar" style="width: 60%"></div>
+            <div class="sim-bar" style="width: 80%"></div>
+            <div class="sim-bar" style="width: 45%"></div>
+            <div class="sim-chart">
+              <div class="sim-col" style="height: 100%"></div>
+              <div class="sim-col" style="height: 65%"></div>
+              <div class="sim-col" style="height: 80%"></div>
+              <div class="sim-col" style="height: 50%"></div>
+              <div class="sim-col" style="height: 90%"></div>
+              <div class="sim-col" style="height: 70%"></div>
+              <div class="sim-col" style="height: 55%"></div>
+              <div class="sim-col" style="height: 85%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="work-overlay">
+        <span class="work-tag">AI · Contact Center · 2025</span>
+        <div class="work-name">SAWT AI Contact Center</div>
+        <div class="work-year">Q2 2025 Go-Live · TASAMA</div>
+      </div>
+      <div class="work-hover-reveal">
+        <div class="work-hover-tag">AI · Automation · Vendor Management</div>
+        <div class="work-hover-title">SAWT AI Contact Center Platform</div>
+        <div class="work-hover-desc">Led end-to-end delivery of TASAMA's AI-powered contact center — owning vendor coordination, call flow architecture, Oracle API integration design, and internal stakeholder alignment across IT, CX, and legal. Managed technical clarifications, UAT planning, and escalation pathways for a Q2 go-live milestone.</div>
+        <div class="work-hover-pills">
+          <span class="work-pill">Call Flow Design</span>
+          <span class="work-pill">AI IVR</span>
+          <span class="work-pill">Oracle API</span>
+          <span class="work-pill">Vendor Management</span>
+          <span class="work-pill">UAT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="work-item reveal reveal-delay-1">
+      <div class="work-blur">
+        <div class="blur-sim work-sim-2">
+          <div class="sim-ui">
+            <div class="sim-bar" style="width: 90%"></div>
+            <div class="sim-bar" style="width: 55%"></div>
+            <div class="sim-bar" style="width: 70%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="work-overlay">
+        <span class="work-tag">CRM · Salesforce · 2025</span>
+        <div class="work-name work-name-small">Salesforce CRM Implementation</div>
+        <div class="work-year">Q4 2025 Planned · TASAMA</div>
+      </div>
+      <div class="work-hover-reveal">
+        <div class="work-hover-tag">CRM · Salesforce · Roadmap</div>
+        <div class="work-hover-title">Salesforce CRM Rollout</div>
+        <div class="work-hover-desc">Driving TASAMA's CRM program from discovery through delivery — defining data architecture, workflow automation, and integration touchpoints with existing enterprise systems. Coordinating across sales, CX, and IT to ensure adoption and business readiness.</div>
+        <div class="work-hover-pills">
+          <span class="work-pill">Salesforce</span>
+          <span class="work-pill">CRM Strategy</span>
+          <span class="work-pill">Process Design</span>
+          <span class="work-pill">System Integration</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="work-item reveal reveal-delay-2">
+      <div class="work-blur">
+        <div class="blur-sim work-sim-3">
+          <div class="sim-ui">
+            <div class="sim-bar" style="width: 75%"></div>
+            <div class="sim-bar" style="width: 40%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="work-overlay">
+        <span class="work-tag">Transformation · Strategy · 2024</span>
+        <div class="work-name work-name-small">Digital Transformation Deck</div>
+        <div class="work-year">81-Slide Strategy · TASAMA</div>
+      </div>
+      <div class="work-hover-reveal">
+        <div class="work-hover-tag">Strategy · Benchmarking · Consulting</div>
+        <div class="work-hover-title">Digital Channels & CX Transformation</div>
+        <div class="work-hover-desc">Authored an 81-slide consulting-grade transformation deck — covering a 2.1/5 maturity assessment, peer benchmarking (stc Solutions, Elm, ServiceNow, Cisco, Aramex), gap analysis, and a three-horizon roadmap. Designed to inform C-suite decisions on digital channel investment and automation strategy.</div>
+        <div class="work-hover-pills">
+          <span class="work-pill">Maturity Assessment</span>
+          <span class="work-pill">Benchmarking</span>
+          <span class="work-pill">Roadmap Design</span>
+          <span class="work-pill">Executive Presentation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="work-item reveal reveal-delay-1">
+      <div class="work-blur">
+        <div class="blur-sim work-sim-4">
+          <div class="sim-ui">
+            <div class="sim-bar" style="width: 50%"></div>
+            <div class="sim-bar" style="width: 85%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="work-overlay">
+        <span class="work-tag">SharePoint · Policy · Client</span>
+        <div class="work-name work-name-small">Policy Hub — KSIADC</div>
+        <div class="work-year">SharePoint Portal · 2025</div>
+      </div>
+      <div class="work-hover-reveal">
+        <div class="work-hover-tag">Knowledge Management · SharePoint</div>
+        <div class="work-hover-title">Client Policy Hub Portal</div>
+        <div class="work-hover-desc">Designed and proposed a SharePoint-based Policy Hub for a key client (KSIADC), enabling structured knowledge management, policy lifecycle governance, and internal self-service access. Led UX briefing with internal design and IT stakeholders prior to client presentation.</div>
+        <div class="work-hover-pills">
+          <span class="work-pill">SharePoint</span>
+          <span class="work-pill">UX Design</span>
+          <span class="work-pill">Knowledge Mgmt</span>
+          <span class="work-pill">Client Delivery</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 5 -->
+    <div class="work-item reveal reveal-delay-3">
+      <div class="work-blur">
+        <div class="blur-sim work-sim-5">
+          <div class="sim-ui">
+            <div class="sim-bar" style="width: 65%"></div>
+            <div class="sim-bar" style="width: 90%"></div>
+            <div class="sim-bar" style="width: 30%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="work-overlay">
+        <span class="work-tag">Business Center · Q1 Launch</span>
+        <div class="work-name work-name-small">TASAMA Business Center</div>
+        <div class="work-year">Q1 2025 Launch</div>
+      </div>
+      <div class="work-hover-reveal">
+        <div class="work-hover-tag">Service Design · Launch · Digital</div>
+        <div class="work-hover-title">TASAMA Business Center Launch</div>
+        <div class="work-hover-desc">Contributed to the successful Q1 launch of the TASAMA Business Center — a key milestone in TASAMA's customer-facing digital ecosystem. Coordinated digital channel readiness, service catalog design, and internal communications to support the announcement.</div>
+        <div class="work-hover-pills">
+          <span class="work-pill">Service Design</span>
+          <span class="work-pill">Channel Launch</span>
+          <span class="work-pill">Digital Operations</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="section-tag reveal">Capabilities</div>
+  <h2 class="section-title reveal reveal-delay-1">Tools of the <em>craft</em>.</h2>
+
+  <div class="skills-layout">
+    <div class="skills-list">
+      <div class="skill-category reveal reveal-delay-1">
+        <div class="skill-cat-title">Core Disciplines</div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <div class="skill-item-name">CX Strategy & Design</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 95%"></div></div>
+            <div class="skill-pct">95%</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-name">Digital Transformation</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%"></div></div>
+            <div class="skill-pct">90%</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-name">AI & Automation</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 82%"></div></div>
+            <div class="skill-pct">82%</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-name">Stakeholder Management</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 92%"></div></div>
+            <div class="skill-pct">92%</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-name">Project Delivery (Agile/PMO)</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%"></div></div>
+            <div class="skill-pct">88%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tools-grid reveal reveal-delay-2">
+      <div class="tool-card">
+        <span class="tool-icon">☁️</span>
+        <div class="tool-name">Salesforce</div>
+        <div class="tool-type">CRM Platform</div>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🎫</span>
+        <div class="tool-name">ServiceNow</div>
+        <div class="tool-type">ITSM & Workflows</div>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🔮</span>
+        <div class="tool-name">Oracle</div>
+        <div class="tool-type">ERP & API Layer</div>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📄</span>
+        <div class="tool-name">SharePoint</div>
+        <div class="tool-type">Knowledge & Portals</div>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📺</span>
+        <div class="tool-name">Appspace</div>
+        <div class="tool-type">Digital Signage & EX</div>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🤖</span>
+        <div class="tool-name">AI Contact Center</div>
+        <div class="tool-type">IVR & NLU</div>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">💬</span>
+        <div class="tool-name">WhatsApp Business</div>
+        <div class="tool-type">Digital Channel</div>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📊</span>
+        <div class="tool-name">Power BI</div>
+        <div class="tool-type">Analytics & Reporting</div>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🏗️</span>
+        <div class="tool-name">JIRA / Confluence</div>
+        <div class="tool-type">Project & Docs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="experience" style="background: var(--bg);">
+  <div class="timeline-header">
+    <div class="section-tag reveal">Experience</div>
+    <h2 class="section-title reveal reveal-delay-1">A career built on <em>impact</em>.</h2>
+  </div>
+
+  <div class="timeline-items">
+    <div class="timeline-line"></div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-meta">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-period">Nov 2025 – Present</div>
+      </div>
+      <div>
+        <div class="timeline-role">Sr. CX & Digital Journey Specialist</div>
+        <div class="timeline-company">TASAMA · PIF Portfolio · Riyadh</div>
+        <div class="timeline-desc">Leading the Digital Experience & Automation (DX&A) function across AI contact center delivery, Salesforce CRM, WhatsApp channels, and digital portal strategy. Acting Director of DX&A overseeing three direct reports and 15+ active workstreams.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-1">
+      <div class="timeline-meta">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-period">Earlier Roles</div>
+      </div>
+      <div>
+        <div class="timeline-role">Digital Experience & CX Specialist</div>
+        <div class="timeline-company">Enterprise & Consulting · Saudi Arabia</div>
+        <div class="timeline-desc">Designed customer journeys, built digital transformation strategies, and delivered NCA-compliant enterprise portal solutions. Worked with Arabic RTL design requirements, PDPL compliance, Nafath integration, and Hijri calendar support across the KSA enterprise landscape.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-2">
+      <div class="timeline-meta">
+        <div class="timeline-year">2018</div>
+        <div class="timeline-period">Early Career</div>
+      </div>
+      <div>
+        <div class="timeline-role">CX & Digital Operations</div>
+        <div class="timeline-company">Earlier Positions · Saudi Arabia</div>
+        <div class="timeline-desc">Foundations in customer experience operations, digital service design, and enterprise application support. Built a background spanning consulting, benchmarking, and hands-on delivery across multiple Saudi sectors.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div>
+    <div class="section-tag reveal">Get In Touch</div>
+    <h2 class="contact-cta reveal reveal-delay-1">Let's build something <em>extraordinary</em> together.</h2>
+    <p style="font-size: 15px; color: var(--text-muted); margin-top: 2rem; line-height: 1.8; max-width: 380px;" class="reveal reveal-delay-2">
+      Open to strategic conversations, consulting opportunities, and senior leadership roles in digital transformation, CX, and enterprise AI.
+    </p>
+  </div>
+  <div class="contact-links reveal reveal-delay-1">
+    <a class="contact-link" href="https://www.linkedin.com/in/faris-alsajjan" target="_blank">
+      <div>
+        <div class="contact-link-label">LinkedIn</div>
+        <div class="contact-link-value">Faris Alsajjan</div>
+      </div>
+      <div class="contact-link-arrow">→</div>
+    </a>
+    <a class="contact-link" href="mailto:faris@example.com">
+      <div>
+        <div class="contact-link-label">Email</div>
+        <div class="contact-link-value">faris@example.com</div>
+      </div>
+      <div class="contact-link-arrow">→</div>
+    </a>
+    <a class="contact-link" href="#">
+      <div>
+        <div class="contact-link-label">Location</div>
+        <div class="contact-link-value">Riyadh, Saudi Arabia</div>
+      </div>
+      <div class="contact-link-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Faris Alsajjan</div>
+  <div class="footer-copy">© 2025 · Digital Experience & Automation</div>
+  <div class="footer-copy" style="color: var(--text-dim);">Riyadh · Saudi Arabia</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .work-item, .industry-card, .tool-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+      ring.style.width = '60px';
+      ring.style.height = '60px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+    });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => obs.observe(el));
+
+  // Animate skill bars on scroll
+  const skillBars = document.querySelectorAll('.skill-bar-fill');
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const w = e.target.style.width;
+        e.target.style.width = '0';
+        e.target.style.transition = 'width 1.2s cubic-bezier(0.4,0,0.2,1)';
+        setTimeout(() => { e.target.style.width = w; }, 100);
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  skillBars.forEach(b => barObs.observe(b));
+</script>
+</body>
+</html>
