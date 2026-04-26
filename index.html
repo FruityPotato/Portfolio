@@ -167,6 +167,30 @@
     padding: 2rem 2rem 1.75rem;
     background: linear-gradient(to top, rgba(10,10,11,0.98) 0%, rgba(10,10,11,0.7) 80%, transparent 100%);
   }
+  .work-live-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: #4ade80; padding: 4px 10px;
+    border: 1px solid rgba(74,222,128,0.3);
+    margin-bottom: 0.75rem;
+  }
+  .work-live-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #4ade80;
+    animation: livePulse 2s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes livePulse {
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:0.5;transform:scale(0.8)}
+  }
+  .work-live-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-top: 1.5rem;
+    padding-bottom: 4px; border-bottom: 1px solid var(--gold);
+    text-decoration: none; position: relative; z-index: 2;
+  }
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   @keyframes scrollPulse{0%,100%{opacity:0.3}50%{opacity:1}}
@@ -280,11 +304,29 @@
     </div>
   </div>
   <div class="work-grid">
-    <!-- FEATURED: SAWT AI Contact Center -->
+    <!-- FEATURED: Tasama Business Center — Product Owner, Live -->
     <div class="work-item reveal">
-      <div class="work-blur"><div class="blur-sim work-sim-1"><div class="sim-ui"><div class="sim-bar" style="width:70%"></div><div class="sim-bar" style="width:50%"></div><div class="sim-chart"><div class="sim-col" style="height:60%"></div><div class="sim-col" style="height:80%"></div><div class="sim-col" style="height:100%"></div><div class="sim-col" style="height:70%"></div><div class="sim-col" style="height:90%"></div><div class="sim-col" style="height:55%"></div><div class="sim-col" style="height:85%"></div></div></div></div></div>
-      <div class="work-overlay"><span class="work-tag">AI &middot; Contact Center &middot; IVR &middot; 2025</span><div class="work-name">SAWT AI Contact Center</div><div class="work-year">End-to-End Delivery &middot; Q2 Go-Live &middot; Tasama</div></div>
-      <div class="work-hover-reveal"><div class="work-hover-tag">AI &middot; Automation &middot; Omnichannel</div><div class="work-hover-title">SAWT AI Contact Center Platform</div><div class="work-hover-desc">Owning end-to-end delivery of Tasama&rsquo;s AI-powered contact center &mdash; from vendor selection and call flow architecture to Oracle API integration design and internal stakeholder alignment across IT, CX, and legal. Managing technical clarifications, UAT planning, and escalation pathways toward a Q2 go-live milestone. This is the flagship AI experience layer for Tasama&rsquo;s customer-facing operations.</div><div class="work-hover-pills"><span class="work-pill">AI IVR</span><span class="work-pill">Call Flow Design</span><span class="work-pill">Oracle API</span><span class="work-pill">Vendor Management</span><span class="work-pill">UAT Planning</span><span class="work-pill">Omnichannel</span></div></div>
+      <div class="work-blur"><div class="blur-sim work-sim-1"><div class="sim-ui"><div class="sim-bar" style="width:80%"></div><div class="sim-bar" style="width:55%"></div><div class="sim-bar" style="width:70%"></div><div class="sim-chart"><div class="sim-col" style="height:70%"></div><div class="sim-col" style="height:90%"></div><div class="sim-col" style="height:60%"></div><div class="sim-col" style="height:100%"></div><div class="sim-col" style="height:75%"></div><div class="sim-col" style="height:85%"></div><div class="sim-col" style="height:55%"></div></div></div></div></div>
+      <div class="work-overlay">
+        <div class="work-live-badge"><div class="work-live-dot"></div>Live Product</div>
+        <span class="work-tag">Product Owner &middot; Digital Platform &middot; PIF &middot; 2025</span>
+        <div class="work-name">Tasama Business Center</div>
+        <div class="work-year">Publicly Released &middot; businesscenter.tasama.com.sa</div>
+      </div>
+      <div class="work-hover-reveal">
+        <div class="work-live-badge" style="margin-bottom:0.75rem"><div class="work-live-dot"></div>Live &mdash; businesscenter.tasama.com.sa</div>
+        <div class="work-hover-tag">Product Ownership &middot; AI Platform &middot; PIF</div>
+        <div class="work-hover-title">Tasama Business Center</div>
+        <div class="work-hover-desc">Served as Product Owner for the Tasama Business Center &mdash; a publicly released AI-assisted digital platform enabling local and international companies to request services, track progress, and manage their Saudi operations end-to-end. The platform offers payroll, automated payments, business setup, and regional headquarters landing, unified through an intelligent dashboard with AI assistance at each step. Built and delivered within the PIF ecosystem as part of Tasama&rsquo;s national champion mandate.</div>
+        <div class="work-hover-pills"><span class="work-pill">Product Ownership</span><span class="work-pill">AI Dashboard</span><span class="work-pill">B2B Platform</span><span class="work-pill">Service Design</span><span class="work-pill">PIF</span><span class="work-pill">Public Launch</span></div>
+        <a class="work-live-link" href="https://businesscenter.tasama.com.sa" target="_blank">View Live Product &rarr;</a>
+      </div>
+    </div>
+    <!-- SAWT AI Contact Center -->
+    <div class="work-item reveal reveal-delay-1">
+      <div class="work-blur"><div class="blur-sim work-sim-4"><div class="sim-ui"><div class="sim-bar" style="width:70%"></div><div class="sim-bar" style="width:50%"></div><div class="sim-chart"><div class="sim-col" style="height:60%"></div><div class="sim-col" style="height:80%"></div><div class="sim-col" style="height:100%"></div><div class="sim-col" style="height:70%"></div><div class="sim-col" style="height:90%"></div></div></div></div></div>
+      <div class="work-overlay"><span class="work-tag">AI &middot; Contact Center &middot; IVR &middot; 2025</span><div class="work-name work-name-small">SAWT AI Contact Center</div><div class="work-year">End-to-End Delivery &middot; Q2 Go-Live &middot; Tasama</div></div>
+      <div class="work-hover-reveal"><div class="work-hover-tag">AI &middot; Automation &middot; Omnichannel</div><div class="work-hover-title">SAWT AI Contact Center Platform</div><div class="work-hover-desc">Owning end-to-end delivery of Tasama&rsquo;s AI-powered contact center &mdash; from vendor selection and call flow architecture to Oracle API integration design and internal stakeholder alignment across IT, CX, and legal. Managing technical clarifications, UAT planning, and escalation pathways toward a Q2 go-live milestone.</div><div class="work-hover-pills"><span class="work-pill">AI IVR</span><span class="work-pill">Call Flow Design</span><span class="work-pill">Oracle API</span><span class="work-pill">Vendor Management</span><span class="work-pill">UAT Planning</span><span class="work-pill">Omnichannel</span></div></div>
     </div>
     <!-- Salesforce CRM -->
     <div class="work-item reveal reveal-delay-1">
